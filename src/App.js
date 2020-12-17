@@ -1,15 +1,25 @@
 //项目根组件
 import React, { Component } from "react";
+import { HashRouter, BrowserRouter, Route, Link } from "react-router-dom";
 
-import { Button } from "antd-mobile";
-// import { Button, WhiteSpace, WingBlank } from "antd-mobile";
-
+import Home from "./pages/Home/index.js";
+import Citylist from "./pages/CityList/index.js";
 export default class App extends Component {
   render() {
     return (
       <div>
-        首页
-        <Button type="primary">primary</Button>
+        <HashRouter>
+          <ul>
+            <li>
+              <Link to="/home">首页</Link>
+            </li>
+            <li>
+              <Link to="/citylist">城市列表</Link>
+            </li>
+          </ul>
+          <Route path="/home" component={Home}></Route>
+          <Route path="/citylist" component={Citylist}></Route>
+        </HashRouter>
       </div>
     );
   }
