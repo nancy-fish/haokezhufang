@@ -1,0 +1,8 @@
+.home {
+  background-color: pink;
+}
+.am-tab-bar-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

@@ -1,68 +1,31 @@
 import React from "react";
 import { TabBar } from "antd-mobile";
+import "./index.css";
 
-export default class Index extends React.Component {
+import { Route } from "react-router-dom";
+import Index from "../Index/index.js";
+import Find from "../Find/index.js";
+import Message from "../Message/index.js";
+import User from "../User/index.js";
+
+export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: "redTab",
       hidden: false,
-      fullScreen: false,
     };
   }
 
-  renderContent(pageText) {
-    return (
-      <div
-        style={{
-          backgroundColor: "white",
-          height: "100%",
-          textAlign: "center",
-        }}
-      >
-        <div style={{ paddingTop: 60 }}>
-          Clicked “{pageText}” tab， show “{pageText}” information
-        </div>
-        <a
-          style={{
-            display: "block",
-            marginTop: 40,
-            marginBottom: 20,
-            color: "#108ee9",
-          }}
-          onClick={(e) => {
-            e.preventDefault();
-            this.setState({
-              hidden: !this.state.hidden,
-            });
-          }}
-        >
-          Click to show/hide tab-bar
-        </a>
-        <a
-          style={{ display: "block", marginBottom: 600, color: "#108ee9" }}
-          onClick={(e) => {
-            e.preventDefault();
-            this.setState({
-              fullScreen: !this.state.fullScreen,
-            });
-          }}
-        >
-          Click to switch fullscreen
-        </a>
-      </div>
-    );
-  }
-
   render() {
+    const {
+      location: { pathname },
+    } = this.props;
     return (
-      <div
-        style={
-          this.state.fullScreen
-            ? { position: "fixed", height: "100%", width: "100%", top: 0 }
-            : { height: 400 }
-        }
-      >
+      <div className="home">
+        <Route path="/home/index" component={Index}></Route>
+        <Route path="/home/find" component={Find}></Route>
+        <Route path="/home/message" component={Message}></Route>
+        <Route path="/home/user" component={User}></Route>
         <TabBar
           unselectedTintColor="#949494"
           tintColor="#33A3F4"
@@ -74,62 +37,48 @@ export default class Index extends React.Component {
             key="Life"
             icon={<i className="iconfont icon-ind"></i>}
             selectedIcon={<i className="iconfont icon-ind"></i>}
-            selected={this.state.selectedTab === "blueTab"}
+            selected={pathname === "/home/index"}
             // badge={1}
             onPress={() => {
-              this.setState({
-                selectedTab: "blueTab",
-              });
+              console.log(this.props.history);
+
+              this.props.history.push("/home/index");
             }}
             data-seed="logId"
-          >
-            {this.renderContent("Life")}
-          </TabBar.Item>
+          ></TabBar.Item>
           <TabBar.Item
             icon={<i className="iconfont icon-findHouse"></i>}
             selectedIcon={<i className="iconfont icon-findHouse"></i>}
             title="找房"
             key="Koubei"
             // badge={"new"}
-            selected={this.state.selectedTab === "redTab"}
+            selected={pathname === "/home/find"}
             onPress={() => {
-              this.setState({
-                selectedTab: "redTab",
-              });
+              this.props.history.push("/home/find");
             }}
             data-seed="logId1"
-          >
-            {this.renderContent("Koubei")}
-          </TabBar.Item>
+          ></TabBar.Item>
           <TabBar.Item
             icon={<i className="iconfont icon-infom"></i>}
             selectedIcon={<i className="iconfont icon-infom"></i>}
             title="资讯"
             key="Friend"
             // dot
-            selected={this.state.selectedTab === "greenTab"}
+            selected={pathname === "/home/message"}
             onPress={() => {
-              this.setState({
-                selectedTab: "greenTab",
-              });
+              this.props.history.push("/home/message");
             }}
-          >
-            {this.renderContent("Friend")}
-          </TabBar.Item>
+          ></TabBar.Item>
           <TabBar.Item
             icon={<i className="iconfont icon-my"></i>}
             selectedIcon={<i className="iconfont icon-my"></i>}
             title="我的"
             key="my"
-            selected={this.state.selectedTab === "yellowTab"}
+            selected={pathname === "/home/user"}
             onPress={() => {
-              this.setState({
-                selectedTab: "yellowTab",
-              });
+              this.props.history.push("/home/user");
             }}
-          >
-            {this.renderContent("My")}
-          </TabBar.Item>
+          ></TabBar.Item>
         </TabBar>
       </div>
     );
