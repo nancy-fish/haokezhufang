@@ -8,14 +8,16 @@ import Find from "../Find/index.js";
 import Message from "../Message/index.js";
 import User from "../User/index.js";
 
+const navs = [
+  { title: "首页", icon: "icon-ind", path: "/home/index" },
+  { title: "找房", icon: "icon-findHouse", path: "/home/find" },
+  { title: "资讯", icon: "icon-infom", path: "/home/message" },
+  { title: "我的", icon: "icon-my", path: "/home/user" },
+];
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      hidden: false,
-    };
   }
-
   render() {
     const {
       location: { pathname },
@@ -30,55 +32,19 @@ export default class Home extends React.Component {
           unselectedTintColor="#949494"
           tintColor="#33A3F4"
           barTintColor="white"
-          hidden={this.state.hidden}
         >
-          <TabBar.Item
-            title="首页"
-            key="Life"
-            icon={<i className="iconfont icon-ind"></i>}
-            selectedIcon={<i className="iconfont icon-ind"></i>}
-            selected={pathname === "/home/index"}
-            // badge={1}
-            onPress={() => {
-              console.log(this.props.history);
-
-              this.props.history.push("/home/index");
-            }}
-            data-seed="logId"
-          ></TabBar.Item>
-          <TabBar.Item
-            icon={<i className="iconfont icon-findHouse"></i>}
-            selectedIcon={<i className="iconfont icon-findHouse"></i>}
-            title="找房"
-            key="Koubei"
-            // badge={"new"}
-            selected={pathname === "/home/find"}
-            onPress={() => {
-              this.props.history.push("/home/find");
-            }}
-            data-seed="logId1"
-          ></TabBar.Item>
-          <TabBar.Item
-            icon={<i className="iconfont icon-infom"></i>}
-            selectedIcon={<i className="iconfont icon-infom"></i>}
-            title="资讯"
-            key="Friend"
-            // dot
-            selected={pathname === "/home/message"}
-            onPress={() => {
-              this.props.history.push("/home/message");
-            }}
-          ></TabBar.Item>
-          <TabBar.Item
-            icon={<i className="iconfont icon-my"></i>}
-            selectedIcon={<i className="iconfont icon-my"></i>}
-            title="我的"
-            key="my"
-            selected={pathname === "/home/user"}
-            onPress={() => {
-              this.props.history.push("/home/user");
-            }}
-          ></TabBar.Item>
+          {navs.map((item) => (
+            <TabBar.Item
+              title={item.title}
+              key={item.path}
+              icon={<i className={`iconfont ${item.icon}`}></i>}
+              selectedIcon={<i className={`iconfont ${item.icon}`}></i>}
+              selected={pathname === item.path}
+              onPress={() => {
+                this.props.history.push(item.path);
+              }}
+            ></TabBar.Item>
+          ))}
         </TabBar>
       </div>
     );
