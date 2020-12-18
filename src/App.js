@@ -4,6 +4,7 @@ import { HashRouter, Route, Redirect, Switch } from "react-router-dom";
 
 import Home from "./pages/Home/index.js";
 import Citylist from "./pages/CityList/index.js";
+import Mymap from "./pages/MapFind/index.js";
 import Nopages from "./pages/Nopage/index.js";
 export default class App extends Component {
   render() {
@@ -15,6 +16,7 @@ export default class App extends Component {
             <Route exact path="/" render={() => <Redirect to="/home" />} />
             <Route path="/home" component={Home} />
             <Route path="/citylist" component={Citylist} />
+            <Route path="/map" component={Mymap} />
             <Route path="*" component={Nopages} />
           </Switch>
         </HashRouter>

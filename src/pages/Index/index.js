@@ -8,6 +8,13 @@ import Nav3 from "../../assets/images/nav-3.png";
 import Nav4 from "../../assets/images/nav-4.png";
 
 import "./index.css";
+
+const navs = [
+  { img: Nav1, title: "整租", path: "/home/find" },
+  { img: Nav2, title: "合租", path: "/home/find" },
+  { img: Nav3, title: "地图找房", path: "/map" },
+  { img: Nav4, title: "去出租", path: "/home/find" },
+];
 export default class App extends Component {
   state = {
     data: ["1", "2", "3"],
@@ -65,32 +72,25 @@ export default class App extends Component {
     }
     return null;
   }
+  renderNavs() {
+    return (
+      <Flex className="flex-nav">
+        {navs.map((item, i) => (
+          <Flex.Item key={i} onClick={() => this.props.history.push(item.path)}>
+            <img src={item.img} alt="nav" />
+            <h3>{item.title}</h3>
+          </Flex.Item>
+        ))}
+      </Flex>
+    );
+  }
   render() {
     return (
       <div className="index-wrapper">
         {/* 轮播图区域 */}
         <div className="swiper-area">{this.renderSwipers()}</div>
         {/* 导航区 */}
-        <div className="navs">
-          <Flex className="flex-nav">
-            <Flex.Item>
-              <img src={Nav1} alt="nav" />
-              <h3>整租</h3>
-            </Flex.Item>
-            <Flex.Item>
-              <img src={Nav2} alt="nav" />
-              <h3>合租</h3>
-            </Flex.Item>
-            <Flex.Item>
-              <img src={Nav3} alt="nav" />
-              <h3>地图找房</h3>
-            </Flex.Item>
-            <Flex.Item>
-              <img src={Nav4} alt="nav" />
-              <h3>去出租</h3>
-            </Flex.Item>
-          </Flex>
-        </div>
+        <div className="navs">{this.renderNavs()}</div>
       </div>
     );
   }
