@@ -9,7 +9,7 @@ import Message from "../Message/index.js";
 import User from "../User/index.js";
 
 const navs = [
-  { title: "首页", icon: "icon-ind", path: "/home/index" },
+  { title: "首页", icon: "icon-ind", path: "/home" },
   { title: "找房", icon: "icon-findHouse", path: "/home/find" },
   { title: "资讯", icon: "icon-infom", path: "/home/message" },
   { title: "我的", icon: "icon-my", path: "/home/user" },
@@ -24,10 +24,10 @@ export default class Home extends React.Component {
     } = this.props;
     return (
       <div className="home">
-        <Route path="/home/index" component={Index}></Route>
-        <Route path="/home/find" component={Find}></Route>
-        <Route path="/home/message" component={Message}></Route>
-        <Route path="/home/user" component={User}></Route>
+        <Route exact path="/home" component={Index} />
+        <Route path="/home/find" component={Find} />
+        <Route path="/home/message" component={Message} />
+        <Route path="/home/user" component={User} />
         <TabBar
           unselectedTintColor="#949494"
           tintColor="#33A3F4"
@@ -40,10 +40,8 @@ export default class Home extends React.Component {
               icon={<i className={`iconfont ${item.icon}`}></i>}
               selectedIcon={<i className={`iconfont ${item.icon}`}></i>}
               selected={pathname === item.path}
-              onPress={() => {
-                this.props.history.push(item.path);
-              }}
-            ></TabBar.Item>
+              onPress={() => this.props.history.push(item.path)}
+            />
           ))}
         </TabBar>
       </div>
