@@ -7,7 +7,7 @@ import Nav2 from "../../assets/images/nav-2.png";
 import Nav3 from "../../assets/images/nav-3.png";
 import Nav4 from "../../assets/images/nav-4.png";
 
-import "./index.css";
+import "./index.scss";
 
 const navs = [
   { img: Nav1, title: "整租", path: "/home/find" },
